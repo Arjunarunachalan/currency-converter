@@ -24,14 +24,23 @@ const DropDown = ({
           className="w-full p-2 border border-gray-300 rounded-md shadow-md focus:outline-none
         focus:ring-2 focus:ring-indigo-500"
         >
-          <hr />
-          {currencies.map((currency) => {
+          {favorites.map((currency) => {
             return (
-              <option value={currency} key={currency}>
+              <option className="bg-gray-200" value={currency} key={currency}>
                 {currency}
               </option>
             );
           })}
+          <hr />
+          {currencies
+            .filter((c) => !favorites.includes(c))
+            .map((currency) => {
+              return (
+                <option value={currency} key={currency}>
+                  {currency}
+                </option>
+              );
+            })}
         </select>
         <button
           onClick={() => handlefavorite(currency)}

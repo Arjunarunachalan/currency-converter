@@ -9,6 +9,9 @@ const Currency_converter = () => {
   const [toCurrency, setToCurrency] = useState("INR");
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [converting, setConverting] = useState(false);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || ["INR","EUR"]
+  );
 
   const fetchCurrency = async () => {
     try {
@@ -59,6 +62,7 @@ const Currency_converter = () => {
           currencies={currencies}
           title="From:"
           currency={fromCurrency}
+          favorites={favorites}
           setCurrency={setFromCurrency}
         />
         <div className="flex justify-center -mb-5 sm:mb-0">
@@ -70,6 +74,7 @@ const Currency_converter = () => {
           </button>
         </div>
         <DropDown
+          favorites={favorites}
           currencies={currencies}
           currency={toCurrency}
           setCurrency={setToCurrency}
